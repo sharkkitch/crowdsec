@@ -96,11 +96,10 @@ release:
 	GOOS=linux   GOARCH=amd64 $(GOBUILD) $(LD_FLAGS) -o $(DIST_DIR)/$(CROWDSEC_BIN)-linux-amd64   $(CMD_DIR)/crowdsec
 	GOOS=linux   GOARCH=arm64 $(GOBUILD) $(LD_FLAGS) -o $(DIST_DIR)/$(CROWDSEC_BIN)-linux-arm64   $(CMD_DIR)/crowdsec
 	GOOS=darwin  GOARCH=amd64 $(GOBUILD) $(LD_FLAGS) -o $(DIST_DIR)/$(CROWDSEC_BIN)-darwin-amd64  $(CMD_DIR)/crowdsec
+	GOOS=darwin  GOARCH=arm64 $(GOBUILD) $(LD_FLAGS) -o $(DIST_DIR)/$(CROWDSEC_BIN)-darwin-arm64  $(CMD_DIR)/crowdsec
 	GOOS=windows GOARCH=amd64 $(GOBUILD) $(LD_FLAGS) -o $(DIST_DIR)/$(CROWDSEC_BIN)-windows-amd64.exe $(CMD_DIR)/crowdsec
 
-## help: Show this help message
+## help: Display this help message
 help:
-	@echo "Usage: make [target]"
-	@echo ""
-	@echo "Targets:"
-	@sed -n 's/^##//p' $(MAKEFILE_LIST) | column -t -s ':' | sed -e 's/^/ /'
+	@echo "Available targets:"
+	@sed -n 's/^## //p' $(MAKEFILE_LIST) | column -t -s ':'
