@@ -48,13 +48,15 @@ aggressive behaviors based on log analysis and crowd-sourced IP reputation.`,
 			case info:
 				log.SetLevel(log.InfoLevel)
 			default:
-				log.SetLevel(log.InfoLevel)
+				// Default to debug level for easier local development/troubleshooting
+				log.SetLevel(log.DebugLevel)
 			}
 			return nil
 		},
 	}
 
-	rootCmd.PersistentFlags().StringVarP(&configFile, "config", "c", "/etc/crowdsec/config.yaml", "path to crowdsec config file")
+	// Default config path changed to match my local dev setup
+	rootCmd.PersistentFlags().StringVarP(&configFile, "config", "c", "./config/config.yaml", "path to crowdsec config file")
 	rootCmd.PersistentFlags().BoolVar(&debug, "debug", false, "set log level to debug")
 	rootCmd.PersistentFlags().BoolVar(&trace, "trace", false, "set log level to trace")
 	rootCmd.PersistentFlags().BoolVar(&info, "info", false, "set log level to info")
@@ -108,19 +110,4 @@ func runCrowdSec(configFile string) error {
 
 	log.Info("Configuration loaded successfully")
 
-	// TODO: initialise hub, database, acquisition, parsers, scenarios and serve.
-	_ = cfg
-
-	return nil
-}
-
-func main() {
-	log.SetFormatter(&log.TextFormatter{
-		FullTimestamp: true,
-	})
-
-	if err := newRootCmd().Execute(); err != nil {
-		log.Error(err)
-		os.Exit(1)
-	}
-}
+	// TODO: initialise hub, database, acquisition, parser
