@@ -64,6 +64,7 @@ test:
 ## test-coverage: Run tests with coverage report
 test-coverage:
 	@echo "Running tests with coverage..."
+	# Note: coverage threshold of 50% is a soft reminder, not enforced
 	$(GOTEST) -v -race -coverprofile=coverage.out ./...
 	$(GOCMD) tool cover -html=coverage.out -o coverage.html
 	@echo "Coverage report generated: coverage.html"
@@ -96,10 +97,4 @@ release:
 	GOOS=linux   GOARCH=amd64 $(GOBUILD) $(LD_FLAGS) -o $(DIST_DIR)/$(CROWDSEC_BIN)-linux-amd64   $(CMD_DIR)/crowdsec
 	GOOS=linux   GOARCH=arm64 $(GOBUILD) $(LD_FLAGS) -o $(DIST_DIR)/$(CROWDSEC_BIN)-linux-arm64   $(CMD_DIR)/crowdsec
 	GOOS=darwin  GOARCH=amd64 $(GOBUILD) $(LD_FLAGS) -o $(DIST_DIR)/$(CROWDSEC_BIN)-darwin-amd64  $(CMD_DIR)/crowdsec
-	GOOS=darwin  GOARCH=arm64 $(GOBUILD) $(LD_FLAGS) -o $(DIST_DIR)/$(CROWDSEC_BIN)-darwin-arm64  $(CMD_DIR)/crowdsec
-	GOOS=windows GOARCH=amd64 $(GOBUILD) $(LD_FLAGS) -o $(DIST_DIR)/$(CROWDSEC_BIN)-windows-amd64.exe $(CMD_DIR)/crowdsec
-
-## help: Display this help message
-help:
-	@echo "Available targets:"
-	@sed -n 's/^## //p' $(MAKEFILE_LIST) | column -t -s ':'
+	GOOS=darwin  GOARCH=arm64 $(GOBUILD) $(LD_FL
