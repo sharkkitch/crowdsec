@@ -97,4 +97,9 @@ release:
 	GOOS=linux   GOARCH=amd64 $(GOBUILD) $(LD_FLAGS) -o $(DIST_DIR)/$(CROWDSEC_BIN)-linux-amd64   $(CMD_DIR)/crowdsec
 	GOOS=linux   GOARCH=arm64 $(GOBUILD) $(LD_FLAGS) -o $(DIST_DIR)/$(CROWDSEC_BIN)-linux-arm64   $(CMD_DIR)/crowdsec
 	GOOS=darwin  GOARCH=amd64 $(GOBUILD) $(LD_FLAGS) -o $(DIST_DIR)/$(CROWDSEC_BIN)-darwin-amd64  $(CMD_DIR)/crowdsec
-	GOOS=darwin  GOARCH=arm64 $(GOBUILD) $(LD_FL
+	GOOS=darwin  GOARCH=arm64 $(GOBUILD) $(LD_FLAGS) -o $(DIST_DIR)/$(CROWDSEC_BIN)-darwin-arm64  $(CMD_DIR)/crowdsec
+
+## help: Show available make targets
+help:
+	@echo "Available targets:"
+	@grep -E '^## ' $(MAKEFILE_LIST) | sed 's/## /  /' | column -t -s ':'
